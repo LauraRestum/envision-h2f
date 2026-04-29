@@ -2,12 +2,8 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
-  "rewrites": [
-    { "source": "/", "destination": "/h2f-landing-page-v4-9.html" }
-  ],
   "redirects": [
-    { "source": "/h2f-landing-page-v4-9", "destination": "/", "permanent": false },
-    { "source": "/index", "destination": "/", "permanent": false }
+    { "source": "/h2f-landing-page-v4-9", "destination": "/", "permanent": false }
   ],
   "headers": [
     {
