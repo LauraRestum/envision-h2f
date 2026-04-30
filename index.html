@@ -1377,6 +1377,82 @@
     }
     @media (max-width: 900px) { .h2f-attrs { grid-template-columns: 1fr; } }
 
+    /* H2F partner / 3PL running logo bar — inside the Custom H2F toggle */
+    .h2f-partner-marquee {
+      margin: 2rem 0;
+      padding: 1.25rem 0 1rem;
+      background: var(--paper);
+      border-top: 1px solid var(--rule-light);
+      border-bottom: 1px solid var(--rule-light);
+      overflow: hidden;
+      position: relative;
+    }
+    .h2f-partner-marquee .h2f-partner-eyebrow {
+      text-align: center;
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--green-deep);
+      margin-bottom: 0.85rem;
+    }
+    .h2f-partner-track {
+      display: flex;
+      align-items: center;
+      width: max-content;
+      animation: h2fPartnerMarquee 28s linear infinite;
+    }
+    .h2f-partner-track:hover { animation-play-state: paused; }
+    @keyframes h2fPartnerMarquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .h2f-partner-slot {
+      flex-shrink: 0;
+      width: 200px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 1.5rem;
+      border-right: 1px solid var(--rule-light);
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      text-align: center;
+      background: var(--white);
+    }
+    .h2f-partner-slot img {
+      max-width: 100%;
+      max-height: 48px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+    .h2f-partner-fade-left,
+    .h2f-partner-fade-right {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 60px;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .h2f-partner-fade-left {
+      left: 0;
+      background: linear-gradient(90deg, var(--paper) 0%, rgba(0,0,0,0) 100%);
+    }
+    .h2f-partner-fade-right {
+      right: 0;
+      background: linear-gradient(-90deg, var(--paper) 0%, rgba(0,0,0,0) 100%);
+    }
+    @media (max-width: 768px) {
+      .h2f-partner-slot { width: 160px; height: 56px; padding: 0 1rem; font-size: 0.85rem; }
+      .h2f-partner-fade-left, .h2f-partner-fade-right { width: 36px; }
+    }
+
     .funding-strip {
       margin-top: 3rem;
       padding: 1.5rem 2rem;
@@ -2852,6 +2928,23 @@
       </div>
 
       <div class="armory-panel" id="h2f">
+        <!-- Running logo bar — manufacturers & 3PL partners (alphabetical) -->
+        <div class="h2f-partner-marquee" aria-label="Manufacturer and 3PL partners">
+          <div class="h2f-partner-eyebrow">// Manufacturer &amp; 3PL Partners</div>
+          <div class="h2f-partner-track">
+            <div class="h2f-partner-slot">Life Fitness</div>
+            <div class="h2f-partner-slot">Rally Fit</div>
+            <div class="h2f-partner-slot">Rogue Fitness</div>
+            <div class="h2f-partner-slot">STNX</div>
+            <div class="h2f-partner-slot" aria-hidden="true">Life Fitness</div>
+            <div class="h2f-partner-slot" aria-hidden="true">Rally Fit</div>
+            <div class="h2f-partner-slot" aria-hidden="true">Rogue Fitness</div>
+            <div class="h2f-partner-slot" aria-hidden="true">STNX</div>
+          </div>
+          <div class="h2f-partner-fade-left"></div>
+          <div class="h2f-partner-fade-right"></div>
+        </div>
+
         <div class="h2f-attrs">
           <div class="h2f-attr">
             <div class="h2f-attr-num">// 01</div>
@@ -2891,6 +2984,23 @@
             <span>MILSTRIP</span>
             <span>GNV</span>
           </div>
+        </div>
+
+        <!-- Running logo bar (second placement) — manufacturers & 3PL partners -->
+        <div class="h2f-partner-marquee" aria-label="Manufacturer and 3PL partners">
+          <div class="h2f-partner-eyebrow">// Manufacturer &amp; 3PL Partners</div>
+          <div class="h2f-partner-track">
+            <div class="h2f-partner-slot">Life Fitness</div>
+            <div class="h2f-partner-slot">Rally Fit</div>
+            <div class="h2f-partner-slot">Rogue Fitness</div>
+            <div class="h2f-partner-slot">STNX</div>
+            <div class="h2f-partner-slot" aria-hidden="true">Life Fitness</div>
+            <div class="h2f-partner-slot" aria-hidden="true">Rally Fit</div>
+            <div class="h2f-partner-slot" aria-hidden="true">Rogue Fitness</div>
+            <div class="h2f-partner-slot" aria-hidden="true">STNX</div>
+          </div>
+          <div class="h2f-partner-fade-left"></div>
+          <div class="h2f-partner-fade-right"></div>
         </div>
       </div>
     </div>
