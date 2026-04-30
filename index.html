@@ -1524,6 +1524,20 @@
       object-fit: contain;
       display: block;
     }
+    /* Stacked variant: image with small caption below (e.g. XMT Solutions) */
+    .h2f-partner-slot.h2f-partner-stacked {
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .h2f-partner-slot.h2f-partner-stacked img { max-height: 38px; }
+    .h2f-partner-slot .h2f-partner-caption {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      line-height: 1;
+    }
     /* Subtle visual separation between Manufacturing and 3PL groups */
     .h2f-partner-slot.h2f-partner-divider { margin-left: 1.75rem; }
     .h2f-partner-fade-left,
@@ -1546,6 +1560,8 @@
     @media (max-width: 768px) {
       .h2f-partner-slot { width: 140px; height: 60px; padding: 0 0.85rem; font-size: 0.9rem; }
       .h2f-partner-slot img { max-height: 42px; }
+      .h2f-partner-slot.h2f-partner-stacked img { max-height: 30px; }
+      .h2f-partner-slot .h2f-partner-caption { font-size: 0.55rem; letter-spacing: 0.1em; }
       .h2f-partner-slot.h2f-partner-divider { margin-left: 1.25rem; }
       .h2f-partner-fade-left, .h2f-partner-fade-right { width: 36px; }
     }
@@ -2982,7 +2998,10 @@
           <div class="h2f-partner-slot"><img src="/logo-mob.png" alt="Rogers Athletics"></div>
           <div class="h2f-partner-slot"><img src="/samson-equipment-logo-white-76.png" alt="Samson"></div>
           <div class="h2f-partner-slot"><img src="/a6df0-sorinex-logo-resize-1.jpg.webp" alt="Sorinex"></div>
-          <div class="h2f-partner-slot">XMT Solutions</div>
+          <div class="h2f-partner-slot h2f-partner-stacked">
+            <img src="/avatar.png" alt="XMT Solutions">
+            <span class="h2f-partner-caption">XMT Solutions</span>
+          </div>
           <!-- 3PL partners (A–Z) -->
           <div class="h2f-partner-slot h2f-partner-divider"><img src="/imgbin-ads-inc-military-chief-executive-company-logistics-military-U59VLKs2YaRHdrBRDaAJY5Atc.jpg" alt="ADS"></div>
           <div class="h2f-partner-slot">Defense Venture Holdings</div>
@@ -2996,7 +3015,10 @@
           <div class="h2f-partner-slot" aria-hidden="true"><img src="/logo-mob.png" alt=""></div>
           <div class="h2f-partner-slot" aria-hidden="true"><img src="/samson-equipment-logo-white-76.png" alt=""></div>
           <div class="h2f-partner-slot" aria-hidden="true"><img src="/a6df0-sorinex-logo-resize-1.jpg.webp" alt=""></div>
-          <div class="h2f-partner-slot" aria-hidden="true">XMT Solutions</div>
+          <div class="h2f-partner-slot h2f-partner-stacked" aria-hidden="true">
+            <img src="/avatar.png" alt="">
+            <span class="h2f-partner-caption">XMT Solutions</span>
+          </div>
           <div class="h2f-partner-slot h2f-partner-divider" aria-hidden="true"><img src="/imgbin-ads-inc-military-chief-executive-company-logistics-military-U59VLKs2YaRHdrBRDaAJY5Atc.jpg" alt=""></div>
           <div class="h2f-partner-slot" aria-hidden="true">Defense Venture Holdings</div>
           <div class="h2f-partner-slot" aria-hidden="true"><img src="/SSI_StackedLogo_FullColor.png.webp" alt=""></div>
