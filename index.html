@@ -1967,16 +1967,23 @@
       .auth-seals { gap: 1.5rem; }
     }
 
-    /* Flow step hover — scale up so text is readable */
+    /* Flow step hover — scale up so text is readable.
+       transform-box: view-box keeps transform-origin in SVG viewBox coords,
+       which JS sets per-element via getBBox(). This is the most reliable
+       cross-browser approach (Chrome, Firefox, Safari, Edge). */
     .flow-step {
-      transform-origin: center;
-      transform-box: fill-box;
+      transform-box: view-box;
+      -webkit-transform-box: view-box;
       transition: transform 0.25s ease, filter 0.25s ease;
       cursor: pointer;
+      will-change: transform;
     }
-    .flow-step:hover {
-      transform: scale(1.18);
+    .flow-step.is-hover,
+    .flow-step:hover,
+    .flow-step:focus {
+      transform: scale(1.2);
       filter: drop-shadow(0 8px 16px rgba(0,24,82,0.35));
+      outline: none;
     }
     /* Bring hovered step to front so it doesn't get clipped by neighbors */
     .flowchart svg g.flow-step:hover {
@@ -2926,13 +2933,53 @@
       });
     });
 
-    // Bring hovered flow-step to front so the scale-up doesn't clip behind neighbors
-    document.querySelectorAll('.flow-step').forEach(step => {
-      step.addEventListener('mouseenter', () => {
+    // Flow-step hover-zoom: compute each step's transform-origin in SVG
+    // viewBox coordinates (using getBBox) so CSS scale works consistently
+    // across Chrome, Firefox, Safari, and Edge. Also bring hovered step to
+    // front and support keyboard focus + touch for mobile/tablet browsers.
+    (function setupFlowStepHover() {
+      const steps = document.querySelectorAll('.flow-step');
+      if (!steps.length) return;
+
+      const applyOrigins = () => {
+        steps.forEach(step => {
+          try {
+            const bbox = step.getBBox();
+            if (!bbox || !bbox.width) return;
+            const cx = bbox.x + bbox.width / 2;
+            const cy = bbox.y + bbox.height / 2;
+            step.style.transformOrigin = cx + 'px ' + cy + 'px';
+            step.style.webkitTransformOrigin = cx + 'px ' + cy + 'px';
+          } catch (e) { /* SVG not yet laid out */ }
+        });
+      };
+
+      const bringToFront = step => {
         const parent = step.parentNode;
-        parent.appendChild(step);
+        if (parent && parent.lastElementChild !== step) parent.appendChild(step);
+      };
+
+      steps.forEach(step => {
+        step.setAttribute('tabindex', '0');
+        step.addEventListener('mouseenter', () => bringToFront(step));
+        step.addEventListener('focus', () => {
+          bringToFront(step);
+          step.classList.add('is-hover');
+        });
+        step.addEventListener('blur', () => step.classList.remove('is-hover'));
+        // Touch: tap to enlarge, tap again (or elsewhere) to dismiss
+        step.addEventListener('touchstart', () => {
+          steps.forEach(s => { if (s !== step) s.classList.remove('is-hover'); });
+          step.classList.toggle('is-hover');
+          if (step.classList.contains('is-hover')) bringToFront(step);
+        }, { passive: true });
       });
-    });
+
+      // Compute origins after layout; recompute on resize since viewBox is fluid
+      if (document.readyState === 'complete') applyOrigins();
+      else window.addEventListener('load', applyOrigins);
+      window.addEventListener('resize', applyOrigins);
+    })();
   </script>
 
 </body>
