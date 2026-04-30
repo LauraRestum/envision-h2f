@@ -1239,6 +1239,14 @@
       color: var(--ink);
       font-weight: 600;
     }
+    .nsn-table tbody td.order-as {
+      width: 140px;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--green-deep);
+      font-weight: 800;
+    }
     .nsn-table tbody td.price {
       text-align: right;
       font-weight: 800;
@@ -1246,9 +1254,23 @@
       width: 130px;
       font-variant-numeric: tabular-nums;
     }
+    .nsn-order-note {
+      margin-bottom: 1rem;
+      border: 1px solid var(--green-deep);
+      color: var(--green-deep);
+      background: var(--paper);
+      padding: 0.75rem 0.9rem;
+      font-size: 0.74rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
     @media (max-width: 800px) {
       .nsn-table tbody td.weight { display: none; }
       .nsn-table thead th:nth-child(3) { display: none; }
+      .nsn-table tbody td.order-as { display: none; }
+      .nsn-table thead th:nth-child(4) { display: none; }
       .nsn-table tbody td.id { width: auto; font-size: 0.68rem; }
       .nsn-table tbody td.name { font-size: 0.8rem; }
     }
@@ -2011,7 +2033,7 @@
           the <span class="accent">Force.</span><br>
           Sustaining<br>
           Readiness.
-          <span class="small">Source the standardized ACFT kit or fully customized H2F facility equipment through one channel. Envision serves all branches of the U.S. Department of War and federal agencies through the DLA Holistic Health and Fitness program.</span>
+          <span class="small">Source the standardized ACFT kit, individual NSN line items, or fully customized H2F facility equipment through one channel. Envision serves all branches of the U.S. Department of War and federal agencies through the DLA Holistic Health and Fitness program.</span>
         </h1>
 
         <div class="hero-actions">
@@ -2041,7 +2063,7 @@
           </div>
           <div class="glance-line">
             <span class="glance-label">Pathways</span>
-            <span class="glance-value">ACFT Kit + Customizable H2F</span>
+            <span class="glance-value">ACFT Kit or Individual NSN Items</span>
           </div>
           <div class="glance-line">
             <span class="glance-label">Eligibility</span>
@@ -2108,7 +2130,7 @@
           </div>
         </div>
       </div>
-      <p class="section-lede">The DLA Holistic Health and Fitness program covers two procurement pathways. Whether you need the standardized fitness test kit or a custom facility build-out, the order moves through one channel from quote to delivery.</p>
+      <p class="section-lede">The DLA Holistic Health and Fitness program covers two procurement pathways. Whether you need the complete fitness test kit, individual NSN items, or a custom facility build-out, the order moves through one channel from quote to delivery.</p>
 
       <div class="eligibility-callout">
         <div class="eligibility-mark">
@@ -2125,8 +2147,9 @@
           <div class="channel-num">PATHWAY 01</div>
           <h3>Army Combat<br>Fitness Test Kit</h3>
           <div class="alias">// ACFT // 12 NSN ITEMS // FIXED PRICING</div>
-          <p class="channel-desc">The standardized 12-item NSN equipment set used to administer the ACFT. Available across all DoW branches and federal agencies. Fixed DLA pricing, kit assembly performed at Envision's Wichita and Dallas campuses.</p>
+          <p class="channel-desc">The standardized 12-item NSN equipment set used to administer the ACFT. Available as the complete kit or as individual NSN items for replacements and partial orders. Fixed DLA pricing across all DoW branches and federal agencies.</p>
           <ul class="channel-attrs">
+            <li>Order the complete kit or any individual NSN line item</li>
             <li>Standardized NSN catalog at fixed DLA unit pricing</li>
             <li>Kit assembly and repackaging at Envision campuses</li>
             <li>Direct delivery to installation, unit, or training site</li>
@@ -2142,7 +2165,7 @@
           <div class="channel-num">PATHWAY 02</div>
           <h3>Customizable<br>H2F Solutions</h3>
           <div class="alias">// COMMERCIAL // SCOPE-REVIEWED // CUSTOM</div>
-          <p class="channel-desc">Beyond the ACFT kit. Full facility outfitting through commercial off-the-shelf procurement: strength, cardio, turf, recovery, and forward-deployed container builds. Each request reviewed for scope.</p>
+          <p class="channel-desc">Beyond the standardized ACFT items. Full facility outfitting through commercial off-the-shelf procurement: strength, cardio, turf, recovery, and forward-deployed container builds. Each request reviewed for scope.</p>
           <ul class="channel-attrs">
             <li>Commercial off-the-shelf equipment from authorized OEMs</li>
             <li>Customer direct delivery, CONUS and OCONUS supported</li>
@@ -2517,7 +2540,7 @@
               <span class="role-num">// 03</span>
               <div class="role-body">
                 <strong>Kitting &amp; Delivery</strong>
-                <p>For ACFT items, kit assembly and repackaging happens at Envision's Wichita and Dallas campuses before direct delivery to your installation, unit, or training site.</p>
+                <p>For complete-kit orders, kit assembly and repackaging happens at Envision's Wichita and Dallas campuses. Individual NSN orders ship direct from inventory. All deliveries route to your installation, unit, or training site.</p>
               </div>
               <span class="role-arrow">→</span>
             </li>
@@ -2677,37 +2700,39 @@
         <span>SECTION 05 // EQUIPMENT CATALOG</span>
         <span class="meta">CAT.001 // FY26</span>
       </div>
-      <h2>Standardized kit. Custom builds. <span class="accent">Every branch.</span></h2>
-      <p class="section-lede">Two procurement pathways, one catalog of record. Toggle between the standardized ACFT NSN inventory and the customizable H2F solution profile.</p>
+      <h2>Standardized items. Custom builds. <span class="accent">Every branch.</span></h2>
+      <p class="section-lede">Two procurement pathways, one catalog of record. The standardized ACFT inventory is available as a complete kit or as individual NSN items. Toggle between ACFT and the customizable H2F solution profile.</p>
 
       <div class="armory-tabs">
-        <button class="armory-tab active" data-target="acft">// ACFT Kit</button>
+        <button class="armory-tab active" data-target="acft">// ACFT Items</button>
         <button class="armory-tab" data-target="h2f">// Custom H2F</button>
       </div>
 
       <div class="armory-panel active" id="acft">
+        <div class="nsn-order-note">All 12 NSN items are individually orderable. Order the complete kit (Anchor SKU 6930-01-692-1671) for a full ACFT setup, or order single line items for replacements, partial deployments, or unit-specific needs.</div>
         <table class="nsn-table">
           <thead>
             <tr>
               <th>NSN</th>
               <th>Item</th>
               <th>Class</th>
+              <th>Order As</th>
               <th>Unit Price</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td class="id">6930-01-692-1671</td><td class="name">Army Combat Fitness Test Set <span style="color:var(--green-deep); font-size:0.65rem; margin-left:0.5rem; font-weight:800;">// COMPLETE</span></td><td class="weight">Anchor SKU</td><td class="price">$2,756.00</td></tr>
-            <tr><td class="id">6930-01-684-6427</td><td class="name">Barbell, Hexagon</td><td class="weight">60 lbs</td><td class="price">$344.89</td></tr>
-            <tr><td class="id">6930-01-684-6433</td><td class="name">Nylon Sled with Pull Strap</td><td class="weight">—</td><td class="price">$171.05</td></tr>
-            <tr><td class="id">6930-01-684-6438</td><td class="name">Kettle Bell, Training</td><td class="weight">40 lbs</td><td class="price">$123.64</td></tr>
-            <tr><td class="id">6930-01-684-6420</td><td class="name">Bumper Plate, Weight</td><td class="weight">45 lbs</td><td class="price">$92.39</td></tr>
-            <tr><td class="id">6930-01-684-6419</td><td class="name">Bumper Plate, Weight</td><td class="weight">35 lbs</td><td class="price">$74.88</td></tr>
-            <tr><td class="id">6930-01-684-6435</td><td class="name">Medicine Ball, Rubber</td><td class="weight">10 lbs</td><td class="price">$66.39</td></tr>
-            <tr><td class="id">6930-01-684-6415</td><td class="name">Bumper Plate, Weight</td><td class="weight">25 lbs</td><td class="price">$54.61</td></tr>
-            <tr><td class="id">6930-01-684-6431</td><td class="name">Tape, Measure</td><td class="weight">—</td><td class="price">$35.46</td></tr>
-            <tr><td class="id">6930-01-684-6409</td><td class="name">Bumper Plate, Weight</td><td class="weight">15 lbs</td><td class="price">$35.49</td></tr>
-            <tr><td class="id">6930-01-684-6410</td><td class="name">Bumper Plate, Weight</td><td class="weight">10 lbs</td><td class="price">$23.55</td></tr>
-            <tr><td class="id">6930-01-684-6430</td><td class="name">Barbell, Collar Spring</td><td class="weight">—</td><td class="price">$15.30</td></tr>
+            <tr><td class="id">6930-01-692-1671</td><td class="name">Army Combat Fitness Test Set <span style="color:var(--green-deep); font-size:0.65rem; margin-left:0.5rem; font-weight:800;">// COMPLETE</span></td><td class="weight">Anchor SKU</td><td class="order-as">Kit + Single Item</td><td class="price">$2,756.00</td></tr>
+            <tr><td class="id">6930-01-684-6427</td><td class="name">Barbell, Hexagon</td><td class="weight">60 lbs</td><td class="order-as">Single Item</td><td class="price">$344.89</td></tr>
+            <tr><td class="id">6930-01-684-6433</td><td class="name">Nylon Sled with Pull Strap</td><td class="weight">—</td><td class="order-as">Single Item</td><td class="price">$171.05</td></tr>
+            <tr><td class="id">6930-01-684-6438</td><td class="name">Kettle Bell, Training</td><td class="weight">40 lbs</td><td class="order-as">Single Item</td><td class="price">$123.64</td></tr>
+            <tr><td class="id">6930-01-684-6420</td><td class="name">Bumper Plate, Weight</td><td class="weight">45 lbs</td><td class="order-as">Single Item</td><td class="price">$92.39</td></tr>
+            <tr><td class="id">6930-01-684-6419</td><td class="name">Bumper Plate, Weight</td><td class="weight">35 lbs</td><td class="order-as">Single Item</td><td class="price">$74.88</td></tr>
+            <tr><td class="id">6930-01-684-6435</td><td class="name">Medicine Ball, Rubber</td><td class="weight">10 lbs</td><td class="order-as">Single Item</td><td class="price">$66.39</td></tr>
+            <tr><td class="id">6930-01-684-6415</td><td class="name">Bumper Plate, Weight</td><td class="weight">25 lbs</td><td class="order-as">Single Item</td><td class="price">$54.61</td></tr>
+            <tr><td class="id">6930-01-684-6431</td><td class="name">Tape, Measure</td><td class="weight">—</td><td class="order-as">Single Item</td><td class="price">$35.46</td></tr>
+            <tr><td class="id">6930-01-684-6409</td><td class="name">Bumper Plate, Weight</td><td class="weight">15 lbs</td><td class="order-as">Single Item</td><td class="price">$35.49</td></tr>
+            <tr><td class="id">6930-01-684-6410</td><td class="name">Bumper Plate, Weight</td><td class="weight">10 lbs</td><td class="order-as">Single Item</td><td class="price">$23.55</td></tr>
+            <tr><td class="id">6930-01-684-6430</td><td class="name">Barbell, Collar Spring</td><td class="weight">—</td><td class="order-as">Single Item</td><td class="price">$15.30</td></tr>
           </tbody>
         </table>
 
@@ -2814,7 +2839,7 @@
             </div>
             <div class="quick-link">
               <span class="label">// Procurement Pathways</span>
-              <span>ACFT Kit + Custom H2F</span>
+              <span>ACFT Items + Custom H2F</span>
             </div>
             <div class="quick-link">
               <span class="label">// Coverage</span>
