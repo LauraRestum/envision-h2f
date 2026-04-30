@@ -1333,6 +1333,102 @@
     }
     @media (max-width: 700px) { .events-grid { grid-template-columns: repeat(3, 1fr); } }
 
+    .hero-stat-callout {
+      margin-top: 4rem;
+      display: grid;
+      grid-template-columns: minmax(280px, 360px) 1fr;
+      gap: 3rem;
+      align-items: center;
+      background: #F8F9FA;
+      border-left: 4px solid var(--green-deep);
+      padding: 3.5rem 4rem;
+      border-radius: 2px;
+      box-shadow: 0 6px 20px rgba(0, 24, 82, 0.06);
+      position: relative;
+    }
+    .hero-stat-callout__numeral {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 260px;
+      line-height: 0.85;
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, #1B365D 0%, #4A90A4 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      user-select: none;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 500ms ease-out, transform 500ms ease-out;
+    }
+    .hero-stat-callout.is-visible .hero-stat-callout__numeral {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .hero-stat-callout__eyebrow {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green-deep);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .hero-stat-callout__eyebrow::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--green-deep);
+    }
+    .hero-stat-callout__headline {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 2.75rem;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: #1B365D;
+      margin: 0 0 1.5rem 0;
+    }
+    .hero-stat-callout__copy p {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: 1.15rem;
+      line-height: 1.6;
+      color: rgba(27, 54, 93, 0.65);
+      margin: 0 0 0.4rem 0;
+    }
+    .hero-stat-callout__copy p:last-child { margin-bottom: 0; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-stat-callout__numeral {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .hero-stat-callout {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 2.25rem 1.75rem;
+      }
+      .hero-stat-callout__numeral {
+        font-size: 160px;
+        text-align: left;
+      }
+      .hero-stat-callout__headline {
+        font-size: 1.85rem;
+      }
+      .hero-stat-callout__copy p {
+        font-size: 1rem;
+      }
+    }
+
     .h2f-attrs {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -2921,9 +3017,17 @@
           </tbody>
         </table>
 
-        <div class="events-section">
-          <div class="events-label">// Aligned with Updated Army Fitness Standards</div>
-          <p style="font-size:0.95rem; line-height:1.6; color:var(--ink); padding:1rem 0; max-width:880px;">In alignment with the Army's recent split of the ACFT into the Army Fitness Test (AFT) and the Combat Fitness Test (CFT), these products support training and readiness in line with the new standards. The standardized 12-item NSN catalog continues to provide a single, complete equipment baseline for both tests.</p>
+        <div class="hero-stat-callout">
+          <div class="hero-stat-callout__numeral" aria-hidden="true">12</div>
+          <div class="hero-stat-callout__content">
+            <div class="hero-stat-callout__eyebrow">// Equipment Baseline</div>
+            <h3 class="hero-stat-callout__headline">One catalog. Both tests.</h3>
+            <div class="hero-stat-callout__copy">
+              <p>The Army split the ACFT into the Army Fitness Test (AFT) and Combat Fitness Test (CFT).</p>
+              <p>Our standardized 12-item NSN catalog supports training and readiness for both.</p>
+              <p>One equipment baseline. Zero disruption to your unit&rsquo;s readiness plan.</p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -3136,6 +3240,24 @@
         document.getElementById(target).classList.add('active');
       });
     });
+
+    (function setupHeroStatCallout() {
+      const callouts = document.querySelectorAll('.hero-stat-callout');
+      if (!callouts.length) return;
+      if (!('IntersectionObserver' in window)) {
+        callouts.forEach(c => c.classList.add('is-visible'));
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+      callouts.forEach(c => observer.observe(c));
+    })();
 
     // Flow-step hover-zoom: compute each step's transform-origin in SVG
     // viewBox coordinates (using getBBox) so CSS scale works consistently
