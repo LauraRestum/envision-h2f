@@ -1340,10 +1340,10 @@
       gap: 3rem;
       align-items: center;
       background: #F8F9FA;
-      border-left: 4px solid var(--green-deep);
-      padding: 3.5rem 4rem;
+      border-left: 8px solid var(--green-deep);
+      padding: 4rem 4.5rem;
       border-radius: 2px;
-      box-shadow: 0 6px 20px rgba(0, 24, 82, 0.06);
+      box-shadow: 0 10px 30px rgba(0, 24, 82, 0.12);
       position: relative;
     }
     .hero-stat-callout__numeral {
@@ -1386,20 +1386,25 @@
     }
     .hero-stat-callout__headline {
       font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 2.75rem;
+      font-weight: 800;
+      font-size: 3.4rem;
       line-height: 1.05;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.015em;
       color: #1B365D;
-      margin: 0 0 1.5rem 0;
+      margin: 0 0 1.75rem 0;
     }
     .hero-stat-callout__copy p {
       font-family: 'Montserrat', sans-serif;
-      font-weight: 400;
-      font-size: 1.15rem;
-      line-height: 1.6;
-      color: rgba(27, 54, 93, 0.65);
-      margin: 0 0 0.4rem 0;
+      font-weight: 600;
+      font-size: 1.3rem;
+      line-height: 1.55;
+      color: #1B365D;
+      margin: 0 0 0.65rem 0;
+    }
+    .hero-stat-callout__copy p:first-child {
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: #00081e;
     }
     .hero-stat-callout__copy p:last-child { margin-bottom: 0; }
 
@@ -1422,10 +1427,13 @@
         text-align: left;
       }
       .hero-stat-callout__headline {
-        font-size: 1.85rem;
+        font-size: 2.1rem;
       }
       .hero-stat-callout__copy p {
-        font-size: 1rem;
+        font-size: 1.1rem;
+      }
+      .hero-stat-callout__copy p:first-child {
+        font-size: 1.2rem;
       }
     }
 
@@ -2362,7 +2370,6 @@
         <span class="branch">U.S. Space Force</span>
         <span class="branch">U.S. Coast Guard</span>
         <span class="branch">National Guard</span>
-        <span class="branch">Department of War</span>
         <span class="branch">DHS</span>
         <span class="branch">Customs &amp; Border Protection</span>
         <span class="branch">TSA</span>
@@ -2570,8 +2577,8 @@
           <path d="M 840 200 L 840 260 L 840 330" class="flow-line-flow" marker-end="url(#arrow-flow)"/>
           <!-- Step 6 → Step 7 (right then down to Envision lane) -->
           <path d="M 940 380 L 960 380 L 960 490 L 960 560" class="flow-line solid" marker-end="url(#arrow-ink)"/>
-          <!-- Step 7 → Step 8 (Envision up and right to KO) -->
-          <path d="M 1080 560 L 1080 490 L 1080 430" class="flow-line solid" marker-end="url(#arrow-ink)"/>
+          <!-- Step 7 → Step 8 (Envision up to KO) -->
+          <path d="M 1040 560 L 1040 430" class="flow-line solid" marker-end="url(#arrow-ink)"/>
           <!-- Step 8 → Step 9 (right) -->
           <path d="M 1200 380 L 1240 380" class="flow-line solid" marker-end="url(#arrow-ink)"/>
           <!-- Step 9 → Step 10 (DLA up to Customer notification) -->
@@ -2959,21 +2966,6 @@
     <div class="logo-marquee-fade-right"></div>
   </section>
 
-  <!-- PARTNER / MANUFACTURER LOGO STRIP -->
-  <section class="partner-logo-strip">
-    <div class="partner-eyebrow">// Manufacturer Partners</div>
-    <div class="partner-title">Authorized OEMs and equipment manufacturers (alphabetical)</div>
-    <div class="partner-logo-row">
-      <div class="partner-logo">Life Fitness</div>
-      <div class="partner-logo">Rally Fit</div>
-      <div class="partner-logo">Rogue Fitness</div>
-      <div class="partner-logo">STNX</div>
-    </div>
-    <div class="partner-link-strip">
-      // Active Program: <a href="https://www.dla.mil/Troop-Support/Construction-and-Equipment/Special-Programs/H2F/" target="_blank" rel="noopener">DLA H2F Program</a>
-    </div>
-  </section>
-
   <!-- ARMORY — WHITE -->
   <section class="armory-section on-light" id="armory">
     <div class="container">
@@ -2984,6 +2976,23 @@
       </div>
       <h2>Standardized items. Custom builds. <span class="accent">Every branch.</span></h2>
       <p class="section-lede">Two procurement pathways, one catalog of record. The standardized AFT/CFT inventory is available as a complete kit or as individual NSN items. Toggle between AFT/CFT and the customizable H2F solution profile.</p>
+
+      <!-- Running logo bar — manufacturers & 3PL partners (visible across both tabs) -->
+      <div class="h2f-partner-marquee" aria-label="Manufacturer and 3PL partners">
+        <div class="h2f-partner-eyebrow">// Manufacturer &amp; 3PL Partners</div>
+        <div class="h2f-partner-track">
+          <div class="h2f-partner-slot">Life Fitness</div>
+          <div class="h2f-partner-slot">Rally Fit</div>
+          <div class="h2f-partner-slot">Rogue Fitness</div>
+          <div class="h2f-partner-slot">STNX</div>
+          <div class="h2f-partner-slot" aria-hidden="true">Life Fitness</div>
+          <div class="h2f-partner-slot" aria-hidden="true">Rally Fit</div>
+          <div class="h2f-partner-slot" aria-hidden="true">Rogue Fitness</div>
+          <div class="h2f-partner-slot" aria-hidden="true">STNX</div>
+        </div>
+        <div class="h2f-partner-fade-left"></div>
+        <div class="h2f-partner-fade-right"></div>
+      </div>
 
       <div class="armory-tabs">
         <button class="armory-tab active" data-target="acft">// AFT/CFT Items</button>
@@ -3029,26 +3038,13 @@
             </div>
           </div>
         </div>
+
+        <div class="partner-link-strip">
+          // Active Program: <a href="https://www.dla.mil/Troop-Support/Construction-and-Equipment/Special-Programs/H2F/" target="_blank" rel="noopener">DLA H2F Program</a>
+        </div>
       </div>
 
       <div class="armory-panel" id="h2f">
-        <!-- Running logo bar — manufacturers & 3PL partners (alphabetical) -->
-        <div class="h2f-partner-marquee" aria-label="Manufacturer and 3PL partners">
-          <div class="h2f-partner-eyebrow">// Manufacturer &amp; 3PL Partners</div>
-          <div class="h2f-partner-track">
-            <div class="h2f-partner-slot">Life Fitness</div>
-            <div class="h2f-partner-slot">Rally Fit</div>
-            <div class="h2f-partner-slot">Rogue Fitness</div>
-            <div class="h2f-partner-slot">STNX</div>
-            <div class="h2f-partner-slot" aria-hidden="true">Life Fitness</div>
-            <div class="h2f-partner-slot" aria-hidden="true">Rally Fit</div>
-            <div class="h2f-partner-slot" aria-hidden="true">Rogue Fitness</div>
-            <div class="h2f-partner-slot" aria-hidden="true">STNX</div>
-          </div>
-          <div class="h2f-partner-fade-left"></div>
-          <div class="h2f-partner-fade-right"></div>
-        </div>
-
         <div class="h2f-attrs">
           <div class="h2f-attr">
             <div class="h2f-attr-num">// 01</div>
@@ -3088,23 +3084,6 @@
             <span>MILSTRIP</span>
             <span>GNV</span>
           </div>
-        </div>
-
-        <!-- Running logo bar (second placement) — manufacturers & 3PL partners -->
-        <div class="h2f-partner-marquee" aria-label="Manufacturer and 3PL partners">
-          <div class="h2f-partner-eyebrow">// Manufacturer &amp; 3PL Partners</div>
-          <div class="h2f-partner-track">
-            <div class="h2f-partner-slot">Life Fitness</div>
-            <div class="h2f-partner-slot">Rally Fit</div>
-            <div class="h2f-partner-slot">Rogue Fitness</div>
-            <div class="h2f-partner-slot">STNX</div>
-            <div class="h2f-partner-slot" aria-hidden="true">Life Fitness</div>
-            <div class="h2f-partner-slot" aria-hidden="true">Rally Fit</div>
-            <div class="h2f-partner-slot" aria-hidden="true">Rogue Fitness</div>
-            <div class="h2f-partner-slot" aria-hidden="true">STNX</div>
-          </div>
-          <div class="h2f-partner-fade-left"></div>
-          <div class="h2f-partner-fade-right"></div>
         </div>
       </div>
     </div>
