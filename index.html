@@ -1491,6 +1491,18 @@
       overflow: hidden;
       position: relative;
     }
+    .h2f-partner-marquee .h2f-partner-eyebrow {
+      text-align: center;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+    @media (max-width: 768px) {
+      .h2f-partner-marquee .h2f-partner-eyebrow { font-size: 0.6rem; letter-spacing: 0.18em; margin-bottom: 0.75rem; }
+    }
     .h2f-partner-track {
       display: flex;
       align-items: center;
@@ -2990,6 +3002,7 @@
 
       <!-- Running logo bar — Manufacturing (A–Z) then 3PL (A–Z) partners -->
       <div class="h2f-partner-marquee" aria-label="Manufacturing and 3PL partners">
+        <div class="h2f-partner-eyebrow">// Manufacturing &amp; 3PL Partners</div>
         <div class="h2f-partner-track">
           <!-- Manufacturing partners (A–Z) -->
           <div class="h2f-partner-slot"><img src="/0x0.png" alt="BeaverFit"></div>
