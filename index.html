@@ -1481,30 +1481,21 @@
     }
     @media (max-width: 900px) { .h2f-attrs { grid-template-columns: 1fr; } }
 
-    /* H2F partner / 3PL running logo bar — inside the Custom H2F toggle */
+    /* Manufacturer + 3PL running logo bar */
     .h2f-partner-marquee {
-      margin: 2rem 0;
-      padding: 1.25rem 0 1rem;
+      margin: 1.75rem 0 2rem;
+      padding: 1.5rem 0;
       background: var(--paper);
       border-top: 1px solid var(--rule-light);
       border-bottom: 1px solid var(--rule-light);
       overflow: hidden;
       position: relative;
     }
-    .h2f-partner-marquee .h2f-partner-eyebrow {
-      text-align: center;
-      font-size: 0.62rem;
-      font-weight: 800;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--green-deep);
-      margin-bottom: 0.85rem;
-    }
     .h2f-partner-track {
       display: flex;
       align-items: center;
       width: max-content;
-      animation: h2fPartnerMarquee 28s linear infinite;
+      animation: h2fPartnerMarquee 40s linear infinite;
     }
     .h2f-partner-track:hover { animation-play-state: paused; }
     @keyframes h2fPartnerMarquee {
@@ -1513,33 +1504,44 @@
     }
     .h2f-partner-slot {
       flex-shrink: 0;
-      width: 200px;
-      height: 64px;
+      width: 180px;
+      height: 72px;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0 1.5rem;
-      border-right: 1px solid var(--rule-light);
-      font-size: 0.95rem;
+      padding: 0 1.25rem;
+      font-size: 1.05rem;
       font-weight: 800;
       letter-spacing: 0.04em;
       color: var(--ink);
       text-align: center;
-      background: var(--white);
     }
     .h2f-partner-slot img {
       max-width: 100%;
-      max-height: 48px;
+      max-height: 52px;
       width: auto;
       height: auto;
       object-fit: contain;
       display: block;
     }
-    .h2f-partner-slot.dark {
-      background: var(--ink);
-      border-right-color: rgba(255,255,255,0.08);
+    /* Stacked variant: image with small caption below (e.g. XMT Solutions) */
+    .h2f-partner-slot.h2f-partner-stacked {
+      flex-direction: column;
+      gap: 0.25rem;
     }
+    .h2f-partner-slot.h2f-partner-stacked img { max-height: 38px; }
+    .h2f-partner-slot .h2f-partner-caption {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      line-height: 1;
+    }
+    /* Invert white logos so they read on the light paper background */
     .h2f-partner-slot.invert img { filter: invert(1); }
+    /* Subtle visual separation between Manufacturing and 3PL groups */
+    .h2f-partner-slot.h2f-partner-divider { margin-left: 1.75rem; }
     .h2f-partner-fade-left,
     .h2f-partner-fade-right {
       position: absolute;
@@ -1558,7 +1560,11 @@
       background: linear-gradient(-90deg, var(--paper) 0%, rgba(0,0,0,0) 100%);
     }
     @media (max-width: 768px) {
-      .h2f-partner-slot { width: 160px; height: 56px; padding: 0 1rem; font-size: 0.85rem; }
+      .h2f-partner-slot { width: 140px; height: 60px; padding: 0 0.85rem; font-size: 0.9rem; }
+      .h2f-partner-slot img { max-height: 42px; }
+      .h2f-partner-slot.h2f-partner-stacked img { max-height: 30px; }
+      .h2f-partner-slot .h2f-partner-caption { font-size: 0.55rem; letter-spacing: 0.1em; }
+      .h2f-partner-slot.h2f-partner-divider { margin-left: 1.25rem; }
       .h2f-partner-fade-left, .h2f-partner-fade-right { width: 36px; }
     }
 
@@ -2982,26 +2988,42 @@
       <h2>Standardized items. Custom builds. <span class="accent">Every branch.</span></h2>
       <p class="section-lede">Two procurement pathways, one catalog of record. The standardized AFT/CFT inventory is available as a complete kit or as individual NSN items. Toggle between AFT/CFT and the customizable H2F solution profile.</p>
 
-      <!-- Running logo bar — manufacturers & 3PL partners (visible across both tabs) -->
-      <div class="h2f-partner-marquee" aria-label="Manufacturer and 3PL partners">
-        <div class="h2f-partner-eyebrow">// Manufacturer &amp; 3PL Partners</div>
+      <!-- Running logo bar — Manufacturing (A–Z) then 3PL (A–Z) partners -->
+      <div class="h2f-partner-marquee" aria-label="Manufacturing and 3PL partners">
         <div class="h2f-partner-track">
-          <div class="h2f-partner-slot"><img src="life_fitness-logo_brandlogos.net_pjs1t-scaled.png" alt="Life Fitness"></div>
-          <div class="h2f-partner-slot dark"><img src="Rogue_Fitness.png" alt="Rogue Fitness"></div>
-          <div class="h2f-partner-slot"><img src="a6df0-sorinex-logo-resize-1.jpg.webp" alt="Sorinex Exercise Equipment"></div>
-          <div class="h2f-partner-slot invert"><img src="samson-equipment-logo-white-76.png" alt="Samson Equipment"></div>
-          <div class="h2f-partner-slot"><img src="SSI_StackedLogo_FullColor.png.webp" alt="Safety & Security International"></div>
-          <div class="h2f-partner-slot"><img src="imgbin-ads-inc-military-chief-executive-company-logistics-military-U59VLKs2YaRHdrBRDaAJY5Atc.jpg" alt="ADS Inc"></div>
-          <div class="h2f-partner-slot">Rally Fit</div>
-          <div class="h2f-partner-slot">STNX</div>
-          <div class="h2f-partner-slot" aria-hidden="true"><img src="life_fitness-logo_brandlogos.net_pjs1t-scaled.png" alt=""></div>
-          <div class="h2f-partner-slot dark" aria-hidden="true"><img src="Rogue_Fitness.png" alt=""></div>
-          <div class="h2f-partner-slot" aria-hidden="true"><img src="a6df0-sorinex-logo-resize-1.jpg.webp" alt=""></div>
-          <div class="h2f-partner-slot invert" aria-hidden="true"><img src="samson-equipment-logo-white-76.png" alt=""></div>
-          <div class="h2f-partner-slot" aria-hidden="true"><img src="SSI_StackedLogo_FullColor.png.webp" alt=""></div>
-          <div class="h2f-partner-slot" aria-hidden="true"><img src="imgbin-ads-inc-military-chief-executive-company-logistics-military-U59VLKs2YaRHdrBRDaAJY5Atc.jpg" alt=""></div>
-          <div class="h2f-partner-slot" aria-hidden="true">Rally Fit</div>
-          <div class="h2f-partner-slot" aria-hidden="true">STNX</div>
+          <!-- Manufacturing partners (A–Z) -->
+          <div class="h2f-partner-slot"><img src="/0x0.png" alt="BeaverFit"></div>
+          <div class="h2f-partner-slot"><img src="/concept_2.png" alt="Concept2"></div>
+          <div class="h2f-partner-slot">Hoplites</div>
+          <div class="h2f-partner-slot"><img src="/life_fitness-logo_brandlogos.net_pjs1t-scaled.png" alt="Life Fitness"></div>
+          <div class="h2f-partner-slot"><img src="/9e1512862460b3a9b4a9609ca09ebcd6_400x400.jpeg" alt="Rally Fitness"></div>
+          <div class="h2f-partner-slot"><img src="/logo-mob.png" alt="Rogers Athletics"></div>
+          <div class="h2f-partner-slot invert"><img src="/samson-equipment-logo-white-76.png" alt="Samson"></div>
+          <div class="h2f-partner-slot"><img src="/a6df0-sorinex-logo-resize-1.jpg.webp" alt="Sorinex"></div>
+          <div class="h2f-partner-slot h2f-partner-stacked">
+            <img src="/avatar.png" alt="XMT Solutions">
+            <span class="h2f-partner-caption">XMT Solutions</span>
+          </div>
+          <!-- 3PL partners (A–Z) -->
+          <div class="h2f-partner-slot h2f-partner-divider"><img src="/imgbin-ads-inc-military-chief-executive-company-logistics-military-U59VLKs2YaRHdrBRDaAJY5Atc.jpg" alt="ADS"></div>
+          <div class="h2f-partner-slot">Defense Venture Holdings</div>
+          <div class="h2f-partner-slot"><img src="/SSI_StackedLogo_FullColor.png.webp" alt="Safety Security International"></div>
+          <!-- Duplicate set for seamless loop -->
+          <div class="h2f-partner-slot" aria-hidden="true"><img src="/0x0.png" alt=""></div>
+          <div class="h2f-partner-slot" aria-hidden="true"><img src="/concept_2.png" alt=""></div>
+          <div class="h2f-partner-slot" aria-hidden="true">Hoplites</div>
+          <div class="h2f-partner-slot" aria-hidden="true"><img src="/life_fitness-logo_brandlogos.net_pjs1t-scaled.png" alt=""></div>
+          <div class="h2f-partner-slot" aria-hidden="true"><img src="/9e1512862460b3a9b4a9609ca09ebcd6_400x400.jpeg" alt=""></div>
+          <div class="h2f-partner-slot" aria-hidden="true"><img src="/logo-mob.png" alt=""></div>
+          <div class="h2f-partner-slot invert" aria-hidden="true"><img src="/samson-equipment-logo-white-76.png" alt=""></div>
+          <div class="h2f-partner-slot" aria-hidden="true"><img src="/a6df0-sorinex-logo-resize-1.jpg.webp" alt=""></div>
+          <div class="h2f-partner-slot h2f-partner-stacked" aria-hidden="true">
+            <img src="/avatar.png" alt="">
+            <span class="h2f-partner-caption">XMT Solutions</span>
+          </div>
+          <div class="h2f-partner-slot h2f-partner-divider" aria-hidden="true"><img src="/imgbin-ads-inc-military-chief-executive-company-logistics-military-U59VLKs2YaRHdrBRDaAJY5Atc.jpg" alt=""></div>
+          <div class="h2f-partner-slot" aria-hidden="true">Defense Venture Holdings</div>
+          <div class="h2f-partner-slot" aria-hidden="true"><img src="/SSI_StackedLogo_FullColor.png.webp" alt=""></div>
         </div>
         <div class="h2f-partner-fade-left"></div>
         <div class="h2f-partner-fade-right"></div>
