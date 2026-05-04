@@ -2251,26 +2251,19 @@
     }
 
     /* Flow step hover — scale up so text is readable.
-       transform-box: view-box keeps transform-origin in SVG viewBox coords,
-       which JS sets per-element via getBBox(). This is the most reliable
-       cross-browser approach (Chrome, Firefox, Safari, Edge). */
+       Scaling is applied via the SVG `transform` attribute in JS (see
+       setupFlowStepHover) so it works identically across every browser
+       (Chrome, Firefox, Safari, Edge, mobile) without depending on
+       transform-box: view-box support. */
     .flow-step {
-      transform-box: view-box;
-      -webkit-transform-box: view-box;
-      transition: transform 0.25s ease, filter 0.25s ease;
       cursor: pointer;
-      will-change: transform;
+      transition: filter 0.25s ease;
     }
     .flow-step.is-hover,
     .flow-step:hover,
     .flow-step:focus {
-      transform: scale(1.2);
       filter: drop-shadow(0 8px 16px rgba(0,24,82,0.35));
       outline: none;
-    }
-    /* Bring hovered step to front so it doesn't get clipped by neighbors */
-    .flowchart svg g.flow-step:hover {
-      z-index: 100;
     }
 
   </style>
@@ -2595,7 +2588,7 @@
           <!-- Step 3 → Step 4 (down) -->
           <path d="M 580 430 L 580 490 L 580 560" class="flow-line solid" marker-end="url(#arrow-ink)"/>
           <!-- Step 4 → Step 5 (Envision back up to Customer) -->
-          <path d="M 680 600 L 720 600 L 720 220 L 740 220" class="flow-line solid" marker-end="url(#arrow-ink)"/>
+          <path d="M 680 600 L 720 600 L 720 150 L 740 150" class="flow-line solid" marker-end="url(#arrow-ink)"/>
           <!-- Step 5 → Step 6 (down) -->
           <path d="M 840 200 L 840 260 L 840 330" class="flow-line-flow" marker-end="url(#arrow-flow)"/>
           <!-- Step 6 → Step 7 (right then down to Envision lane) -->
@@ -3286,25 +3279,32 @@
       callouts.forEach(c => observer.observe(c));
     })();
 
-    // Flow-step hover-zoom: compute each step's transform-origin in SVG
-    // viewBox coordinates (using getBBox) so CSS scale works consistently
-    // across Chrome, Firefox, Safari, and Edge. Also bring hovered step to
-    // front and support keyboard focus + touch for mobile/tablet browsers.
+    // Flow-step hover-zoom: apply an SVG `transform` attribute on each step
+    // (translate+scale around the step's bbox center) so the box visibly
+    // grows on hover/focus/tap. Using the SVG attribute (not CSS transform)
+    // makes this behave identically in every browser — Chrome, Firefox,
+    // Safari, Edge, and mobile — without depending on transform-box support.
     (function setupFlowStepHover() {
       const steps = document.querySelectorAll('.flow-step');
       if (!steps.length) return;
 
-      const applyOrigins = () => {
-        steps.forEach(step => {
-          try {
-            const bbox = step.getBBox();
-            if (!bbox || !bbox.width) return;
-            const cx = bbox.x + bbox.width / 2;
-            const cy = bbox.y + bbox.height / 2;
-            step.style.transformOrigin = cx + 'px ' + cy + 'px';
-            step.style.webkitTransformOrigin = cx + 'px ' + cy + 'px';
-          } catch (e) { /* SVG not yet laid out */ }
-        });
+      const SCALE = 1.2;
+
+      const zoomIn = step => {
+        try {
+          const bbox = step.getBBox();
+          if (!bbox || !bbox.width) return;
+          const cx = bbox.x + bbox.width / 2;
+          const cy = bbox.y + bbox.height / 2;
+          const tx = cx * (1 - SCALE);
+          const ty = cy * (1 - SCALE);
+          step.setAttribute('transform',
+            'translate(' + tx + ' ' + ty + ') scale(' + SCALE + ')');
+        } catch (e) { /* SVG not yet laid out */ }
+      };
+
+      const zoomOut = step => {
+        step.removeAttribute('transform');
       };
 
       const bringToFront = step => {
@@ -3314,24 +3314,37 @@
 
       steps.forEach(step => {
         step.setAttribute('tabindex', '0');
-        step.addEventListener('mouseenter', () => bringToFront(step));
+        step.addEventListener('mouseenter', () => {
+          bringToFront(step);
+          zoomIn(step);
+        });
+        step.addEventListener('mouseleave', () => zoomOut(step));
         step.addEventListener('focus', () => {
           bringToFront(step);
           step.classList.add('is-hover');
+          zoomIn(step);
         });
-        step.addEventListener('blur', () => step.classList.remove('is-hover'));
+        step.addEventListener('blur', () => {
+          step.classList.remove('is-hover');
+          zoomOut(step);
+        });
         // Touch: tap to enlarge, tap again (or elsewhere) to dismiss
         step.addEventListener('touchstart', () => {
-          steps.forEach(s => { if (s !== step) s.classList.remove('is-hover'); });
-          step.classList.toggle('is-hover');
-          if (step.classList.contains('is-hover')) bringToFront(step);
+          steps.forEach(s => {
+            if (s !== step) {
+              s.classList.remove('is-hover');
+              zoomOut(s);
+            }
+          });
+          const active = step.classList.toggle('is-hover');
+          if (active) {
+            bringToFront(step);
+            zoomIn(step);
+          } else {
+            zoomOut(step);
+          }
         }, { passive: true });
       });
-
-      // Compute origins after layout; recompute on resize since viewBox is fluid
-      if (document.readyState === 'complete') applyOrigins();
-      else window.addEventListener('load', applyOrigins);
-      window.addEventListener('resize', applyOrigins);
     })();
   </script>
 
