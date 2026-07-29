@@ -3755,5 +3755,259 @@
     })();
   </script>
 
+  <!-- ============ VENDOR SPOTLIGHT FEATURE BUBBLE ============ -->
+  <style>
+    .spotlight-bubble {
+      position: fixed;
+      right: 1.25rem;
+      bottom: 1.25rem;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 0.85rem 2.4rem 0.85rem 1rem;
+      background: var(--blue-dark);
+      border: 1px solid rgba(120, 190, 33, 0.5);
+      border-radius: 4px;
+      box-shadow: 0 12px 34px rgba(0, 8, 30, 0.6), 0 0 22px rgba(120, 190, 33, 0.12);
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      text-align: left;
+      max-width: 300px;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.4s ease, transform 0.4s ease, box-shadow 0.25s ease;
+    }
+    .spotlight-bubble.is-in { opacity: 1; transform: translateY(0); }
+    .spotlight-bubble:hover { box-shadow: 0 14px 40px rgba(0, 8, 30, 0.7), 0 0 30px rgba(120, 190, 33, 0.28); }
+    .spotlight-bubble .sb-dot {
+      flex: none;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 0 rgba(120, 190, 33, 0.6);
+      animation: sb-pulse 2s infinite;
+    }
+    @keyframes sb-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(120, 190, 33, 0.6); }
+      70% { box-shadow: 0 0 0 10px rgba(120, 190, 33, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(120, 190, 33, 0); }
+    }
+    .spotlight-bubble .sb-eyebrow {
+      display: block;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.2rem;
+    }
+    .spotlight-bubble .sb-title {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.3;
+    }
+    .spotlight-bubble .sb-sub {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: rgba(240, 244, 255, 0.75);
+      margin-top: 0.1rem;
+    }
+    .spotlight-bubble .sb-close {
+      position: absolute;
+      top: 0.3rem;
+      right: 0.35rem;
+      width: 1.35rem;
+      height: 1.35rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      color: rgba(240, 244, 255, 0.55);
+      font-family: inherit;
+      font-size: 0.95rem;
+      line-height: 1;
+      cursor: pointer;
+      padding: 0;
+    }
+    .spotlight-bubble .sb-close:hover { color: #fff; }
+    .spotlight-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 210;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      background: rgba(0, 8, 30, 0.88);
+    }
+    .spotlight-modal.is-open { display: flex; }
+    .spotlight-modal .sm-panel {
+      position: relative;
+      width: min(680px, 100%);
+      height: min(88vh, 980px);
+      background: #000d2e;
+      border: 1px solid rgba(120, 190, 33, 0.4);
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.65);
+    }
+    .spotlight-modal .sm-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.7rem 1rem 0.7rem 1.25rem;
+      background: var(--blue-dark);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .spotlight-modal .sm-bar span {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--green);
+    }
+    .spotlight-modal .sm-close {
+      flex: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.9rem;
+      height: 1.9rem;
+      background: none;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 3px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 1rem;
+      line-height: 1;
+      cursor: pointer;
+      padding: 0;
+    }
+    .spotlight-modal .sm-close:hover { border-color: var(--green); color: var(--green); }
+    .spotlight-modal .sm-body {
+      width: 100%;
+      height: calc(100% - 3.3rem);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      background: #e9ebee;
+    }
+    .spotlight-modal .sm-loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #53565A;
+    }
+    @media (max-width: 640px) {
+      .spotlight-bubble { right: 0.75rem; bottom: 0.75rem; max-width: calc(100vw - 1.5rem); }
+      .spotlight-modal { padding: 0.5rem; }
+      .spotlight-modal .sm-panel { height: 94vh; }
+    }
+  </style>
+
+  <div class="spotlight-bubble" id="spotlightBubble" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Open the H2F vendor spotlight featuring NICE Recovery Systems">
+    <span class="sb-dot" aria-hidden="true"></span>
+    <span>
+      <span class="sb-eyebrow">New</span>
+      <span class="sb-title">H2F Vendor Spotlight</span>
+      <span class="sb-sub">NICE Recovery Systems</span>
+    </span>
+    <button class="sb-close" id="spotlightDismiss" type="button" aria-label="Dismiss spotlight bubble">&times;</button>
+  </div>
+
+  <div class="spotlight-modal" id="spotlightModal" role="dialog" aria-modal="true" aria-label="H2F vendor spotlight: NICE Recovery Systems">
+    <div class="sm-panel">
+      <div class="sm-bar">
+        <span>// H2F Vendor Spotlight</span>
+        <button class="sm-close" id="spotlightClose" type="button" aria-label="Close spotlight">&times;</button>
+      </div>
+      <div class="sm-body" id="spotlightBody"><div class="sm-loading">Loading spotlight</div></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const bubble = document.getElementById('spotlightBubble');
+      const dismiss = document.getElementById('spotlightDismiss');
+      const modal = document.getElementById('spotlightModal');
+      const body = document.getElementById('spotlightBody');
+      const closeBtn = document.getElementById('spotlightClose');
+      const KEY = 'h2fSpotlightDismissed';
+      let loaded = false;
+
+      let stored = false;
+      try { stored = sessionStorage.getItem(KEY) === '1'; } catch (e) {}
+      if (!stored) {
+        setTimeout(() => bubble.classList.add('is-in'), 1200);
+      }
+
+      function loadSpotlight() {
+        if (loaded) return;
+        loaded = true;
+        fetch('vendor-spotlight.html')
+          .then((r) => r.text())
+          .then((txt) => {
+            const doc = new DOMParser().parseFromString(txt, 'text/html');
+            const merge = doc.querySelector('center');
+            if (merge) merge.remove();
+            let css = Array.from(doc.querySelectorAll('style')).map((s) => s.textContent).join('\n');
+            css = css.replace(/:root/g, ':host').replace(/(^|\})(\s*)body(\s*\{)/g, '$1$2.sp-root$3');
+            const shadow = body.attachShadow({ mode: 'open' });
+            shadow.innerHTML = '<style>' + css + ' .sp-root { min-height: 100%; }</style>' +
+              '<div class="sp-root">' + doc.body.innerHTML + '</div>';
+          })
+          .catch(() => {
+            loaded = false;
+            body.innerHTML = '<div class="sm-loading"><a href="vendor-spotlight.html" target="_blank" rel="noopener" style="color:inherit;">Open the vendor spotlight</a></div>';
+          });
+      }
+
+      function openModal() {
+        loadSpotlight();
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+        closeBtn.focus();
+      }
+      function closeModal() {
+        modal.classList.remove('is-open');
+        document.body.style.overflow = '';
+        bubble.focus();
+      }
+      function hideBubble() {
+        bubble.classList.remove('is-in');
+        try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
+      }
+
+      bubble.addEventListener('click', openModal);
+      bubble.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(); }
+      });
+      dismiss.addEventListener('click', (e) => {
+        e.stopPropagation();
+        hideBubble();
+      });
+      closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+      });
+    })();
+  </script>
+
 </body>
 </html>
